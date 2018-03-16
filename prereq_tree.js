@@ -92,7 +92,7 @@ function ui_add_node(parent_node_id, link_obj) {
 		kdam.classList.add("kdam");
 		kdam.classList.add("kdam" + num_nodes);
 		kdam.style.marginRight = "5px";
-		var kdams = (course_obj["kdam"] == "" ? "<br>" : "<b>מקצועות קדם: </b>" + course_obj["kdam"]);
+		var kdams = (course_obj["kdam"] == "" ? "" : "<b>מקצועות קדם: </b>" + course_obj["kdam"]);
 		var tsmds = (course_obj["tsamud"] == "" ? "<br>" : "<b>מקצועות צמודים: </b>" + course_obj["tsamud"]);
 		if(kdams.length > 70) kdams = kdams.substring(0, 70) + "...";
 		if(tsmds.length > 70) tsmds = tsmds.substring(0, 70) + "...";

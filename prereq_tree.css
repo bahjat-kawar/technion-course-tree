@@ -50,7 +50,7 @@ ol, ul { list-style:none; }
 	display: none !important;
 }
 .legend {
-	border:1px solid black;
+	border:1px solid #777;
 	border-radius:4px;
 	display:inline-block;
 	opacity:1;

@@ -1,5 +1,19 @@
 var num_nodes = 0;
 var shown_faculties = [];
+var selector = null;
+
+function ui_init() {
+	document.getElementById("rootCourse").value = "234114";
+	document.getElementById('faculty').value = "";
+	selector = new Selectr(document.getElementById('faculty'), {
+		'searchable': false,
+		'placeholder': "כל הפקולטות"
+	});
+	selector.on('selectr.change', function(option) {
+		update_faculty_list();
+	});
+	ui_rerender();
+}
 
 function ui_rerender() {
 	var root_course = get_course(document.getElementById("rootCourse").value);
@@ -15,20 +29,8 @@ function ui_rerender() {
 		"course_name": root_course["course_name"],
 		"link_type": "קדם"
 	});
+	update_faculty_list();
 	shown_faculties = get_select_values(document.getElementById("faculty"));
-	toggle_faculty();
-	if(document.getElementById("faculty").style.display != "none") toggle_faculty();
-}
-
-function toggle_faculty() {
-	if(document.getElementById("faculty").style.display == "none") {
-		document.getElementById("faculty").style.display = "inline-block";
-		document.getElementById("facultyList").style.display = "none";
-	} else {
-		update_faculty_list();
-		document.getElementById("faculty").style.display = "none";
-		document.getElementById("facultyList").style.display = "inline-block";
-	}
 }
 
 function ui_toggle_toolbar() {
@@ -45,16 +47,10 @@ function ui_toggle_toolbar() {
 }
 
 function update_faculty_list() {
-	var faculties = get_select_labels(document.getElementById("faculty"));
-	document.getElementById("facultyList").innerHTML = "";
-	for(var i = 0; i < faculties.length; i++) {
-		if(i != 0) document.getElementById("facultyList").innerHTML += ", ";
-		document.getElementById("facultyList").innerHTML += faculties[i];
-	}
-	if(document.getElementById("facultyList").innerHTML.length > 70) {
-		document.getElementById("facultyList").innerHTML = document.getElementById("facultyList").innerHTML.substring(0, 70) + "...";
-	}
-	if(faculties.length == 0) document.getElementById("facultyList").innerHTML = "כל הפקולטות";
+	var str = get_select_labels(document.getElementById('faculty')).join(", ");
+	if(str.length > 45) str = str.substring(0, 45) + "...";
+	if(str.length == 0) str = "כל הפקולטות";
+	selector.setPlaceholder(str);
 }
 
 function ui_generate_successors(node_num, course_id) {
@@ -92,8 +88,12 @@ function ui_add_node(parent_node_id, link_obj) {
 		kdam.classList.add("kdam");
 		kdam.classList.add("kdam" + num_nodes);
 		kdam.style.marginRight = "5px";
-		var kdams = (course_obj["kdam"] == "" ? "" : "<b>מקצועות קדם: </b>" + course_obj["kdam"]);
-		var tsmds = (course_obj["tsamud"] == "" ? "<br>" : "<b>מקצועות צמודים: </b>" + course_obj["tsamud"]);
+		var kdams = (course_obj["kdam"] == "" ? "" : "מקצועות קדם: " + course_obj["kdam"] + "\n");
+		var tsmds = (course_obj["tsamud"] == "" ? "" : "מקצועות צמודים: " + course_obj["tsamud"]);
+		kdam.setAttribute("title", kdams + tsmds);
+		
+		kdams = (course_obj["kdam"] == "" ? "" : "<b>מקצועות קדם: </b>" + course_obj["kdam"]);
+		tsmds = (course_obj["tsamud"] == "" ? "<br>" : "<b>מקצועות צמודים: </b>" + course_obj["tsamud"]);
 		if(kdams.length > 70) kdams = kdams.substring(0, 70) + "...";
 		if(tsmds.length > 70) tsmds = tsmds.substring(0, 70) + "...";
 		kdam.innerHTML = kdams + "<br>" + tsmds;
@@ -142,29 +142,19 @@ function is_valid_id(course_id) {
 }
 
 function get_select_values(select) {
-  var result = [];
-  var options = select && select.options;
-  var opt;
-
-  for (var i=0, iLen=options.length; i<iLen; i++) {
-    opt = options[i];
-
-    if (opt.selected) {
-      result.push(opt.value || opt.text);
-    }
-  }
-  return result;
+  return selector.getValue();
 }
 
 function get_select_labels(select) {
   var result = [];
+  var vals = selector.getValue();
   var options = select && select.options;
   var opt;
 
   for (var i=0, iLen=options.length; i<iLen; i++) {
     opt = options[i];
 
-    if (opt.selected) {
+    if (vals.includes(opt.value)) {
       result.push(opt.text);
     }
   }

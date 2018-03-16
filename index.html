@@ -4,17 +4,20 @@
 	<meta charset="utf-8"/>
 	<title>עץ קדמים של קורסים בטכניון</title>
 	<script type="text/javascript" src="courses_unified.js"></script>
+	
+    <script src="selectr/selectr.min.js"></script>
+	<link rel="stylesheet" href="selectr/selectr.min.css">
+	
 	<script type="text/javascript" src="prereq_tree.js"></script>
 	<link rel="stylesheet" href="prereq_tree.css" />
 </head>
-<body dir="rtl">
+<body dir="rtl" onload="ui_init();">
 	<div class="header">
 		<span id="toolbox">
 			קורס שורש:
-			<input type="text" value="234114" id="rootCourse" class="header-input" />
+			<input type="text" id="rootCourse" class="header-input" />
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			הצגת קורסים מהפקולטות: 
-			<span id="facultyList" class="header-input" onclick="toggle_faculty();">כל הפקולטות</span>
 			<select id="faculty" multiple style="display:none;">
 				<option value="20">ארכיטקטורה ובינוי ערים</option>
 				<option value="13">ביולוגיה</option>
@@ -55,13 +58,19 @@
 			עדכון אחרון:
 			<b>16 מרץ 2018</b>
 		</span>
-		<input type="button" value="מידע" onclick="ui_toggle_toolbar();" class="header-button header-floater" id="toggleButton" />
+		<span class="header-floater">
+			<input type="button" value="מידע" onclick="ui_toggle_toolbar();" class="header-button" id="toggleButton" />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			מפתח: 
+			<span class="legend">
+			קדם
+			</span>
+			<span class="legend tsamud">
+			צמוד
+			</span>
+		</span>
 	</div>
 
 	<ul class="tree" id="rootUL"></ul>
-
-	<script type="text/javascript">
-	ui_rerender();
-	</script>
 </body>
 </html>

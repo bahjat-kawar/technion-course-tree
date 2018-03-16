@@ -1,5 +1,5 @@
 /* General styles */
-html, body { margin: 0px; padding: 0px; overflow-x: hidden; }
+html, body { margin: 0px; padding: 0px; overflow-x: hidden; width:100%; height:100%; }
 a:link, a:visited { color: blue; }
 ol, ul { list-style:none; }
 /* Header styles */
@@ -10,6 +10,7 @@ ol, ul { list-style:none; }
 	padding: 10px;
 	text-align: top;
 	box-shadow: 3px 3px 3px #ccc;
+	height: 32px;
 }
 .header-input {
 	background:#fff;
@@ -32,11 +33,29 @@ ol, ul { list-style:none; }
 	margin-left:20px;
 }
 #info {
-	height:32px;
-	line-height:32px;
+	height:29px;
+	line-height:29px;
 }
 #info > b:first-child {
 	text-shadow: 2px 2px #aaa;
+}
+.selectr-container {
+	display: inline-block;
+	width:400px !important;
+}
+.has-selected .selectr-placeholder, .selectr-empty, .selectr-option.excluded {
+	display: inline-block !important;
+}
+.has-selected .selectr-label {
+	display: none !important;
+}
+.legend {
+	border:1px solid black;
+	border-radius:4px;
+	display:inline-block;
+	opacity:1;
+	padding:4px 8px 4px 8px;
+	border-radius:none !important;
 }
 /* Tree styles */
 .tree { margin: 1em; }

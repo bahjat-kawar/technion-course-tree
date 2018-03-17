@@ -170,8 +170,11 @@ li:hover > .kdam {
 	background: #ccc !important;
 }
 /* Mobile compatibility */
-@media screen and (max-width: 768px) {
+.hide-on-mobile {
+	display:none !important;
+}
+@media (min-width:1000px) {
 	.hide-on-mobile {
-		display:none !important;
+		display:inline-block !important;
 	}
 }

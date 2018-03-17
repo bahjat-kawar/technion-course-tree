@@ -16,6 +16,7 @@
 		<span id="toolbox">
 			קורס שורש:
 			<input type="text" id="rootCourse" class="header-input" />
+			<span class="hide-on-mobile">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			הצגת קורסים מהפקולטות: 
 			<select id="faculty" multiple style="display:none;">
@@ -43,6 +44,7 @@
 				<option value="27">רפואה</option>
 				<option value="450">תכנית לסטודנטים אורחים</option>
 			</select>
+			</span>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" value="הצג" onclick="ui_rerender();" class="header-button" />
 		</span>
@@ -58,7 +60,7 @@
 			עדכון אחרון:
 			<b>16 מרץ 2018</b>
 		</span>
-		<span class="header-floater">
+		<span class="header-floater hide-on-mobile">
 			<input type="button" value="מידע" onclick="ui_toggle_toolbar();" class="header-button" id="toggleButton" />
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			מפתח: 

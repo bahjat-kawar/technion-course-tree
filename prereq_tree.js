@@ -86,6 +86,7 @@ function ui_add_node(parent_node_id, link_obj) {
 	if(course_obj != null && (course_obj["kdam"] != "" || course_obj["tsamud"] != "")) {
 		var kdam = document.createElement("span");
 		kdam.classList.add("kdam");
+		kdam.classList.add("hide-on-mobile");
 		kdam.classList.add("kdam" + num_nodes);
 		kdam.style.marginRight = "5px";
 		var kdams = (course_obj["kdam"] == "" ? "" : "מקצועות קדם: " + course_obj["kdam"] + "\n");
